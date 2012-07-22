@@ -9,7 +9,8 @@ class MissionController < ApplicationController
 			@result_hash = {result: "success"}
 		else
 			@result_hash = {result: "failure"}
-
+		end
+		
 		respond_to do |format|
 			format.json { render :json => @result_hash }
 		end
