@@ -1,6 +1,12 @@
 class UserController < ApplicationController
 
 	skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
+	after_filter :set_access_control_headers
+
+	def set_access_control_headers
+		headers['Access-Control-Allow-Origin'] = '*'
+	   	headers['Access-Control-Request-Method'] = '*'
+	end
 
 	def get_token
 		@user = User.where({:username => params[:username]}).first
