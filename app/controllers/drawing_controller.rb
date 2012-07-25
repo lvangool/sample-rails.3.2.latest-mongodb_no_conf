@@ -6,7 +6,7 @@ class DrawingController < ApplicationController
 		@user = User.find_for_token_authentication(params)
 		@drawing = nil
 
-		if !@user.nil?
+		if !@user.nil? && !params[:image].nil?
 			@drawing = Drawing.new
 			@drawing.from_base64(params[:image], @user)
 		end
