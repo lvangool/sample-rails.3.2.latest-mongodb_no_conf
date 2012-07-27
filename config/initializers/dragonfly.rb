@@ -8,7 +8,8 @@ if Rails.env.production?
     c.datastore = Dragonfly::DataStorage::S3DataStore.new(
       :bucket_name => 'nzk-assets',
       :access_key_id => ENV['S3_KEY'],
-      :secret_access_key => ENV['S3_SECRET']
+      :secret_access_key => ENV['S3_SECRET'],
+      :region => 'eu-west-1'
     )
   end
 end
