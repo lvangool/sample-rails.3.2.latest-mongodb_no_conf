@@ -4,7 +4,7 @@ NightZookeeper::Application.routes.draw do
   root :to => "home#index"
 
    match "app/mission/complete/:id_mission" => "mission#complete"
-   match "app/drawing/add" => "drawing#add_from_base64"
+   match "app/drawing/add" => "drawing#add_from_app"
    match "app/missions" => "user#get_missions"
    match "app/drawings" => "user#get_drawings"
    match "app/auth" => "user#get_token"

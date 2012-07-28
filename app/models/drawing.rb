@@ -5,6 +5,7 @@ class Drawing
 
 	field :image_uid
   	image_accessor :image
+  	field :curves
   
   	embedded_in :user
 
