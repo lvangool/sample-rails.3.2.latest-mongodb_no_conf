@@ -17,6 +17,7 @@ class MissionController < ApplicationController
 				@result_hash = {result: "success"}
 			else
 				@result_hash = {result: "failure"}
+			end
 		else
 			@result_hash = {result: "failure"}
 		end
