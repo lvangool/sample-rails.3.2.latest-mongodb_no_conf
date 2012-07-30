@@ -7,8 +7,16 @@ class MissionController < ApplicationController
 		@result_hash = {}
 
 		if !@user.nil?
-			@user.missions.find(params[:mission_id])
-			@result_hash = {result: "success"}
+			mission = @user.missions.find(params[:mission_id])
+			
+			if !mission.nil?
+				mission.completed = true
+				mission.date_completed = Time.now
+				mission.save
+
+				@result_hash = {result: "success"}
+			else
+				@result_hash = {result: "failure"}
 		else
 			@result_hash = {result: "failure"}
 		end
