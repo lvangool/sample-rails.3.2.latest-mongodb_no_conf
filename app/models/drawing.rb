@@ -6,6 +6,7 @@ class Drawing
 	field :image_uid
   	image_accessor :image
   	field :curves
+  	field :date_created, type: Time, default: Time.now
   
   	embedded_in :user
 

@@ -14,12 +14,12 @@ class MissionController < ApplicationController
 				mission.date_completed = Time.now
 				mission.save
 
-				@result_hash = {result: "success"}
+				@result_hash = {status: "success"}
 			else
-				@result_hash = {result: "failure"}
+				@result_hash = {status: "failure"}
 			end
 		else
-			@result_hash = {result: "failure"}
+			@result_hash = {status: "failure"}
 		end
 
 		respond_to do |format|

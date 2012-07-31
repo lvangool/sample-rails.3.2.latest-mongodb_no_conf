@@ -46,7 +46,7 @@ class UserController < ApplicationController
 		@result_hash = {}
 
 		if !@user.nil?
-			@result_hash = {status: "success", drawings: @user.drawings.map { |drawing| {:full=> drawing.image.png.url, :thumb => drawing.image.thumb('160x120#', :png).url} }.compact }
+			@result_hash = {status: "success", drawings: @user.drawings.order_by(:date_created => :desc).map { |drawing| {:full=> drawing.image.png.url, :thumb => drawing.image.thumb('160x120#', :png).url} }.compact }
 		else
 			@result_hash = {status: "failure"}
 		end
