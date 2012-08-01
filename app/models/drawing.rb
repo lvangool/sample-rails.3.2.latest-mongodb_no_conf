@@ -8,9 +8,9 @@ class Drawing
   	field :curves
   	field :date_created, type: Time, default: Time.now
   
-  	embedded_in :drawn, polymorphic: true # in user!
-  	embedded_in :mission_drawing, polymorphic: true # in mission
-  	embedded_in :mission_template, polymorphic: true # in mission
+  	embedded_in :user
+  	embedded_in :mission_template, class_name: 'Mission', inverse_of: :template_drawing
+  	embedded_in :mission_result, class_name: 'Mission', inverse_of: :result_drawing
 
   	def from_base64(image_data)
   		self.image = Base64.decode64(image_data)

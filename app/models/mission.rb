@@ -9,8 +9,8 @@ class Mission
   field :date_completed, type: Time
   
   embedded_in :user
-  embeds_one :template, class_name: 'Drawing', as: :mission_template
-  embeds_one :result, class_name: 'Drawing', as: :mission_drawing
+  embeds_one :template_drawing, class_name: 'Drawing', inverse_of: :mission_template
+  embeds_one :result_drawing, class_name: 'Drawing', inverse_of: :mission_result
 
   def complete(curves, image)
   	self.completed = true
