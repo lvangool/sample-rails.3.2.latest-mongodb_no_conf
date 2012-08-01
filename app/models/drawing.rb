@@ -16,4 +16,8 @@ class Drawing
   		self.image = Base64.decode64(image_data)
   		self.image.name = 'app_drawing.png'
   	end
+
+  	def get_base64
+  		return  Base64.encode64(self.image.data)
+  	end
 end
