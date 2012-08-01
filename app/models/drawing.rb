@@ -8,10 +8,12 @@ class Drawing
   	field :curves
   	field :date_created, type: Time, default: Time.now
   
-  	embedded_in :user
+  	embedded_in :drawn, polymorphic: true # in user!
+  	embedded_in :starter, polymorphic: true # in mission
 
   	def from_base64(image_data, user)
   		self.image = Base64.decode64(image_data)
+  		self.image.name = 'app_drawing.png'
   		self.user = user
   	end
 end
