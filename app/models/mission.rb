@@ -15,7 +15,7 @@ class Mission
   def complete(curves, image)
   	self.completed = true
   	self.date_completed = Time.now
-    self.drawing = Drawing.new({:curves => curves})
-    self.drawing.from_base64(image)
+    self.result = Drawing.new({:curves => curves})
+    self.result.from_base64(image)
   end
 end
