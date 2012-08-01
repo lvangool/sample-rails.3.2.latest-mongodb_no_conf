@@ -49,7 +49,6 @@ class UserController < ApplicationController
 
 		if !@user.nil?
 			@result_hash = {status: "success", drawings: @user.drawings.order_by(:date_created => :desc).map { |drawing| {:_id => drawing._id, 
-																														  :curves => (drawing.curves if drawing.curves),
 																														  :full=> drawing.image.url(:format => 'png'), 
 																														  :thumb => drawing.image.thumb('160x120#').url(:format => 'png')} }.compact }
 		else
