@@ -32,8 +32,8 @@ class UserController < ApplicationController
 
 		if !@user.nil?
 			# Should get only the drawing type of mission
-			@result_hash = {status: "success", missions: @user.missions.map {|mission| {:mission => mission, :result => (mission.result_drawing.image.url if mission.result_drawing), 
-																						:template => (mission.template_drawing.image.url if mission.template_drawing)} }}
+			@result_hash = {status: "success", missions: @user.missions.map {|mission| {:mission => mission, :result => (mission.result_drawing.image.url(:format => 'png') if mission.result_drawing), 
+																						:template => (mission.template_drawing.image.url(:format => 'png') if mission.template_drawing)} }}
 		else
 			@result_hash = {status: "failure"}
 		end
@@ -48,7 +48,7 @@ class UserController < ApplicationController
 		@result_hash = {}
 
 		if !@user.nil?
-			@result_hash = {status: "success", drawings: @user.drawings.order_by(:date_created => :desc).map { |drawing| {:_id => drawing._id, :full=> drawing.image.url, :thumb => drawing.image.thumb('160x120#').url} }.compact }
+			@result_hash = {status: "success", drawings: @user.drawings.order_by(:date_created => :desc).map { |drawing| {:_id => drawing._id, :full=> drawing.image.url(:format => 'png'), :thumb => drawing.image.thumb('160x120#').url(:format => 'png')} }.compact }
 		else
 			@result_hash = {status: "failure"}
 		end
