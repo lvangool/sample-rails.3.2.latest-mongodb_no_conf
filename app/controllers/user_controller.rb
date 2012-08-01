@@ -26,11 +26,12 @@ class UserController < ApplicationController
 		end
 	end
 
-	def get_missions
+	def get_drawing_missions
 		@user = User.find_for_token_authentication(params)
 		@result_hash = {}
 
 		if !@user.nil?
+			# Should get only the drawing type of mission
 			@result_hash = {status: "success", missions: @user.missions}
 		else
 			@result_hash = {status: "failure"}

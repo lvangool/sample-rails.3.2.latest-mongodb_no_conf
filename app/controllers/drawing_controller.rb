@@ -8,7 +8,8 @@ class DrawingController < ApplicationController
 
 		if !@user.nil? && !params[:image].nil?
 			@drawing = Drawing.new({:curves => params[:curves]})
-			@drawing.from_base64(params[:image], @user)
+			@drawing.from_base64(params[:image])
+			@drawing.user = @user
 		end
 
 		respond_to do |format|

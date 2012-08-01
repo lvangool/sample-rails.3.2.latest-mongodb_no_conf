@@ -10,8 +10,7 @@ class MissionController < ApplicationController
 			mission = @user.missions.find(params[:mission_id])
 			
 			if !mission.nil?
-				mission.completed = true
-				mission.date_completed = Time.now
+				mission.complete(params[:curves], params[:image])
 				mission.save
 
 				@result_hash = {status: "success"}

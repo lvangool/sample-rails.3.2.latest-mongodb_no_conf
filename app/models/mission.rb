@@ -11,8 +11,10 @@ class Mission
   embedded_in :user
   embeds_one :drawing, as: :starter
 
-  def complete
+  def complete(curves, image)
   	self.completed = true
   	self.date_completed = Time.now
+    self.drawing = Drawing.new({:curves => curves})
+    self.drawing.from_base64(image)
   end
 end
