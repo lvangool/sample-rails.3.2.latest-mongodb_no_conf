@@ -32,7 +32,7 @@ class UserController < ApplicationController
 
 		if !@user.nil?
 			# Should get only the drawing type of mission
-			@result_hash = {status: "success", missions: @user.missions.map {|mission| if mission.drawing then mission.drawing = mission.drawing.image.url else mission end}}
+			@result_hash = {status: "success", missions: @user.missions}
 		else
 			@result_hash = {status: "failure"}
 		end
