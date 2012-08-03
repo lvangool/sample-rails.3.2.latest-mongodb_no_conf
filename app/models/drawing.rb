@@ -24,6 +24,6 @@ class Drawing
   	end
 
   	def add_parent(parent_id)
-  		self.parent_drawing = self.user.drawings.find(parent_id)
+  		self.parent_drawing = self.user.drawings.find(parent_id).dup
   	end
 end
