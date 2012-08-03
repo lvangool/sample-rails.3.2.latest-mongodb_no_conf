@@ -9,6 +9,7 @@ class DrawingController < ApplicationController
 		if !@user.nil? && !params[:image].nil?
 			@drawing = Drawing.new({:curves => params[:curves], :user => @user})
 			@drawing.from_base64(params[:image])
+			logger.debug params[:parent_id]
 			@drawing.add_parent(params[:parent_id]) if params[:parent_id]
 		end
 
