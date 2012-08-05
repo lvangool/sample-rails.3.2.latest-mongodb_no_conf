@@ -95,6 +95,7 @@ GEM
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.5.2)
+    newrelic_rpm (3.4.1)
     nokogiri (1.5.5)
     origin (1.0.4)
     orm_adapter (0.4.0)
@@ -168,6 +169,7 @@ DEPENDENCIES
   jquery-rails
   json
   mongoid
+  newrelic_rpm
   rack-cache
   rails (= 3.2.7)
   rmagick
