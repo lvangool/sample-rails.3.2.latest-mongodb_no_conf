@@ -8,6 +8,7 @@ NightZookeeper::Application.routes.draw do
    match "app/missions" => "user#get_drawing_missions"
    match "app/drawings" => "user#get_drawings"
    match "app/auth" => "user#get_token"
+   match "app/drawing/delete" => "drawing#delete"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

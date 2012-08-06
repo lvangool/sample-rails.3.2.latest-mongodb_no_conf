@@ -22,4 +22,25 @@ class DrawingController < ApplicationController
 		end
 	end
 
+	def delete
+		@user = User.find_for_token_authentication(params)
+
+		if !@user.nil? && !params[:id_drawing].nil?
+			@drawing = Drawing.find(params[:id_drawing])
+
+			if @drawing
+				@drawing.delete
+			end
+		end
+
+		respond_to do |format|
+			if !@drawing.nil? && @drawing.save
+				format.json { render json: { status: "success" } }
+			else
+				format.json { render json: { status: "failure" } }
+			end
+		end
+
+	end
+
 end
