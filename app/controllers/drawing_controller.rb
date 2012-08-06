@@ -27,6 +27,7 @@ class DrawingController < ApplicationController
 
 		if !@user.nil? && !params[:id_drawing].nil?
 			@drawing = @user.drawings.find(params[:id_drawing])
+			@drawing.delete
 		end
 
 		respond_to do |format|
