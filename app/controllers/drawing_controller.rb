@@ -24,6 +24,7 @@ class DrawingController < ApplicationController
 
 	def delete
 		@user = User.find_for_token_authentication(params)
+		@drawing = nil
 
 		if !@user.nil? && !params[:id_drawing].nil?
 			@drawing = @user.drawings.find(params[:id_drawing])

@@ -41,7 +41,7 @@ class UserController < ApplicationController
 																	confirmation: mission.confirmation, 
 																	name: mission.name, 
 																	result: ({image: mission.result_drawing.image.url(format: 'png', _id: mission.result_drawing._id)} if mission.result_drawing), 
-																	template: ({image: mission.template_drawing.image.url(format: 'png', _id: mission.template_drawing)} if mission.template_drawing)
+																	template: ({image: mission.template_drawing.image.url(format: 'png', _id: mission.template_drawing._id)} if mission.template_drawing)
 																	} 
 														}	
 							}
