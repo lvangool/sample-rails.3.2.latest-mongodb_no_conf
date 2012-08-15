@@ -38,6 +38,6 @@ class User
 
   field :username
 
-  embeds_many :drawings, as: :drawn
+  embeds_many :drawings, as: :drawable
   embeds_many :missions
 end

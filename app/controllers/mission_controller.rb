@@ -1,6 +1,15 @@
 class MissionController < ApplicationController
 
 	skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
+	
+	# Delete this block after testing
+	after_filter :set_access_control_headers
+
+	def set_access_control_headers
+		headers['Access-Control-Allow-Origin'] = '*'
+	   	headers['Access-Control-Request-Method'] = '*'
+	end
+	# end of block to delete after testing
 
 	def complete
 		@user = User.find_for_token_authentication(params)
