@@ -17,8 +17,7 @@ class Mission
   def complete(curves, image)
   	self.completed = true
   	self.date_completed = Time.now
-    self.completed_drawing = Drawing.new
-    drawing = self.completed_drawing
+    drawing = Drawing.new
 
     drawing.strokes_attributes = JSON.parse(curves.to_s)
 
@@ -27,6 +26,7 @@ class Mission
     end
     
     drawing.from_base64(image)
-    drawing.save
+    self.completed_drawing = drawing
+    self.completed_drawing.save
   end
 end
