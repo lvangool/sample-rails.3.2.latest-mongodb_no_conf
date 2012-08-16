@@ -17,11 +17,11 @@ class Mission
   	self.date_completed = Time.now
     drawing = self.completed_drawing.build
 
-    drawing.strokes_attributes = JSON.parse(curves.to_s)
+    # drawing.strokes_attributes = JSON.parse(curves.to_s)
 
-    if !self.template_drawing.nil?
-      drawing.base_drawing = self.template_drawing.dup
-    end
+    # if !self.template_drawing.nil?
+    #   drawing.base_drawing = self.template_drawing.dup
+    # end
     
     drawing.from_base64(image)
     drawing.save
