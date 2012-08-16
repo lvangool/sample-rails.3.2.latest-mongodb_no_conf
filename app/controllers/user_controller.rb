@@ -33,7 +33,8 @@ class UserController < ApplicationController
 			# Should get only the drawing type of mission
 			@result_hash = {
 							status: "success", 
-							missions: @user.missions.order_by(:date_created.desc, :completed.asc).map {|mission| {
+							missions: @user.missions.order_by(:date_created.desc, :completed.asc).map {|mission| logger.debug mission._id
+																{
 																	_id: mission._id, 
 																	completed: mission.completed, 
 																	prompt: mission.prompt, 
