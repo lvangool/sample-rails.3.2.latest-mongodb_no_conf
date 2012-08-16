@@ -3,11 +3,10 @@ class UserController < ApplicationController
 	skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
 	
 	# Delete this block after testing
-	after_filter :set_access_control_headers
-
-	def set_access_control_headers
-		headers['Access-Control-Allow-Origin'] = '*'
-	   	headers['Access-Control-Request-Method'] = '*'
+	before_filter :allow_cross_domain_access
+	def allow_cross_domain_access
+	  response.headers["Access-Control-Allow-Origin"] = "*"
+	  response.headers["Access-Control-Allow-Methods"] = "*"
 	end
 	# end of block to delete after testing
 
@@ -40,7 +39,7 @@ class UserController < ApplicationController
 																	prompt: mission.prompt, 
 																	confirmation: mission.confirmation, 
 																	name: mission.name, 
-																	result: ({image: mission.completed_drawing.image.thumb('384x288#').url(format: 'png'), _id: mission.completed_drawing._id} if mission.completed_drawing), 
+																	result: ({image: mission.completed_drawing.image.thumb('384x288#').url(format: 'png'), _id: mission.completed_drawing._id} if !mission.completed_drawing.nil?), 
 																	template: ({image: mission.template_drawing.image.url(format: 'png'), thumb: mission.template_drawing.image.thumb('384x288#').url(format: 'png'), _id: mission.template_drawing._id} if mission.template_drawing)
 																	} 
 														}	
