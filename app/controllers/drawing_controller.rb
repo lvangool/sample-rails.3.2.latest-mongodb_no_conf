@@ -18,10 +18,9 @@ class DrawingController < ApplicationController
 		if !@user.nil? && !params[:image].nil?
 			@drawing = @user.drawings.build
 
-			@drawing.strokes_attributes = JSON.parse(params[:curves].to_s) 
-			@drawing.temp_image = params[:image]
-			@drawing.add_parent(params[:base_id]) if params[:base_id]
-			@drawing.upload_image()
+			# @drawing.strokes_attributes = JSON.parse(params[:curves].to_s) 
+			@drawing.from_base64(params[:image])
+			# @drawing.add_parent(params[:base_id]) if params[:base_id]
 		end
 
 		respond_to do |format|
@@ -30,7 +29,7 @@ class DrawingController < ApplicationController
 
 				format.json { render json: { status: "success" } }
 			else
-				format.json { render json: { status: "failure" } }
+				format.json { render json: { status: "failure" , error: (@drawing.error if @drawing)} }
 			end
 		end
 	end
