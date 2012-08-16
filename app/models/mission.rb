@@ -15,8 +15,15 @@ class Mission
   def complete(curves, image)
   	self.completed = true
   	self.date_completed = Time.now
-    self.result_drawing = Drawing.new({:curves => curves})
-    self.result_drawing.from_base64(image)
-    self.result_drawing.save
+    self.completed_drawing = self.user.drawings.build
+
+    self.completed_drawing.strokes_attributes = JSON.parse(curves.to_s)
+
+    if !self.template_drawing.nil?
+      self.completed_drawing.base_drawing = self.template_drawing.dup
+    end
+    
+    self.completed_drawing.from_base64(image)
+    self.completed_drawing.save
   end
 end
