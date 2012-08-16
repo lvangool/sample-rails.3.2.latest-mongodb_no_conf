@@ -12,16 +12,19 @@ class Mission
   embeds_one :template_drawing, class_name: "Drawing", as: :drawable
   embeds_one :completed_drawing, class_name: "Drawing", as: :drawable
 
+  accepts_nested_attributes_for :completed_drawing
+
   def complete(curves, image)
   	self.completed = true
   	self.date_completed = Time.now
-    drawing = self.completed_drawing.build
+    self.completed_drawing = Drawing.new
+    drawing = self.completed_drawing
 
-    # drawing.strokes_attributes = JSON.parse(curves.to_s)
+    drawing.strokes_attributes = JSON.parse(curves.to_s)
 
-    # if !self.template_drawing.nil?
-    #   drawing.base_drawing = self.template_drawing.dup
-    # end
+    if !self.template_drawing.nil?
+      drawing.base_drawing = self.template_drawing.dup
+    end
     
     drawing.from_base64(image)
     drawing.save
