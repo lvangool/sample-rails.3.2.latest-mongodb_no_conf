@@ -8,7 +8,6 @@ class Drawing
 	field :date_created, type: Time, default: Time.now
 
   # Temp attribute whilst job is processing
-  field :temp_strokes
   field :temp_image
 
 	embeds_one :base_drawing, class_name: "Drawing", as: :drawable, cyclic: true
@@ -33,6 +32,6 @@ class Drawing
 	end
 
 	def add_parent(base_id)
-		self.base_drawing = self.user.drawings.find(base_id).dup
+		self.base_drawing = self.drawable.drawings.find(base_id).dup
 	end
 end
