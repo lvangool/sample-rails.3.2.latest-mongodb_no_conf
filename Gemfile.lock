@@ -44,6 +44,11 @@ GEM
       fssm (>= 0.2.7)
       sass (~> 3.1)
     daemons (1.1.9)
+    delayed_job (3.0.3)
+      activesupport (~> 3.0)
+    delayed_job_mongoid (2.0.0)
+      delayed_job (~> 3.0)
+      mongoid (~> 3.0)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -158,6 +163,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass
+  delayed_job_mongoid
   devise
   devise-encryptable
   dragonfly

@@ -18,17 +18,16 @@ class DrawingController < ApplicationController
 			@drawing = @user.drawings.build
 
 			@drawing.strokes_attributes = JSON.parse(params[:curves].to_s)
-			@drawing.from_base64(params[:image])
-			@drawing.add_parent(params[:base_id]) if params[:base_id]
+			@drawing.temp_image = params[:image]
 		end
 
 		respond_to do |format|
 			if !@drawing.nil? && @drawing.save
-				# Launch a job to convert the base64 into image and s3 upload.
+				Drawing.delay.process_image(@user._id, @drawing._id, params[:base_id])
 
 				format.json { render json: { status: "success" } }
 			else
-				format.json { render json: { status: "failure" , error: (@drawing.error if @drawing)} }
+				format.json { render json: { status: "failure" } }
 			end
 		end
 	end
