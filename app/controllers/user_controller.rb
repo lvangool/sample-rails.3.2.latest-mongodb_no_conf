@@ -40,7 +40,7 @@ class UserController < ApplicationController
 																	prompt: mission.prompt, 
 																	confirmation: mission.confirmation, 
 																	name: mission.name, 
-																	result: ({image: mission.completed_drawing.image.thumb('384x288#').url(format: 'png'), _id: mission.completed_drawing._id} if !mission.completed_drawing.nil?), 
+																	result: ({image: mission.completed_drawing.image.thumb('384x288#').url(format: 'png'), _id: mission.completed_drawing._id} if mission.completed_drawing), 
 																	template: ({image: mission.template_drawing.image.url(format: 'png'), thumb: mission.template_drawing.image.thumb('384x288#').url(format: 'png'), _id: mission.template_drawing._id} if mission.template_drawing)
 																} 
 														}	
