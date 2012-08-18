@@ -19,12 +19,15 @@ class Drawing
 
   def self.process_image(user_id, drawing_id, base_id)
     user = User.find(user_id)
-    drawing = user.drawings.find(drawing_id)
+    
+    if  user.drawings.where(_id: drawing_id).exists?
+      drawing = user.drawings.find(drawing_id)
 
-    drawing.from_base64(drawing.temp_image)
-    drawing.remove_attribute(:temp_image)
-    drawing.base_drawing = user.drawings.find(base_id).dup if base_id
-    drawing.save
+      drawing.from_base64(drawing.temp_image)
+      drawing.remove_attribute(:temp_image)
+      drawing.base_drawing = user.drawings.find(base_id).dup if base_id
+      drawing.save
+    end
   end
 
 	def from_base64(image_data)
