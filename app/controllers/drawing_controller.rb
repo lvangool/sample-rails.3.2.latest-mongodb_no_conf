@@ -24,7 +24,7 @@ class DrawingController < ApplicationController
 		respond_to do |format|
 			if !@drawing.nil? && @drawing.save
 				Drawing.delay.process_drawing(@user._id, @drawing._id, params[:base_id])
-				# UserMailer.delay.send_drawing(@user)
+				UserMailer.delay.send_drawing
 
 				format.json { render json: { status: "success" } }
 			else
