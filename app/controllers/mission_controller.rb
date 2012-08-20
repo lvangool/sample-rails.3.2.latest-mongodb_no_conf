@@ -16,10 +16,13 @@ class MissionController < ApplicationController
 
 		if !@user.nil?
 			mission = @user.missions.find(params[:mission_id])
-			
-			if !mission.nil?
-				mission.complete(params[:curves], params[:image])
-				mission.save
+			mission.completed = true
+			mission.date_completed = Time.now
+			mission.completed_drawing = Drawing.new(temp_image: params[:image])
+			mission.completed_drawing.strokes_attributes = JSON.parse(params[:curves].to_s)
+
+			if !mission.nil? && mission.completed_drawing.save && mission.save
+				Drawing.delay.process_mission(@user._id, params[:mission_id])
 
 				@result_hash = {status: "success"}
 			else
