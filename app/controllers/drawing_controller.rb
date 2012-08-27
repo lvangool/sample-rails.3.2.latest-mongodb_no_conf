@@ -17,18 +17,31 @@ class DrawingController < ApplicationController
 			@user = User.create_from_email(params[:email])
 		end
 
-		@drawing = @user.drawings.build
-		@drawing.strokes_attributes = JSON.parse(params[:curves].to_s)
-		@drawing.temp_image = params[:image]
+		if !params[:image].nil?
+			@drawing = @user.drawings.build
+			@drawing.strokes_attributes = JSON.parse(params[:curves].to_s)
+			@drawing.temp_image = params[:image]
+		end
 
 		respond_to do |format|
-			if @user.save && @drawing.save
-				Drawing.delay.process_drawing(@user._id, @drawing._id, params[:base_id])
-				UserMailer.delay.send_drawing
+			if @user.changed.empty? # User not created
+				if !@drawing.nil? && @drawing.save
+					Drawing.delay.process_drawing(@user._id, @drawing._id, params[:base_id])
+					UserMailer.delay.send_drawing(@user._id)
 
-				format.json { render json: { status: "success" } }
-			else
-				format.json { render json: { status: "failure" } }
+					format.json { render json: { status: "success" } }
+				else
+					format.json { render json: { status: "failure" } }
+				end
+			else # User created
+				if @user.save && !@drawing.nil? && @drawing.save
+					Drawing.delay.process_drawing(@user._id, @drawing._id, params[:base_id])
+					UserMailer.delay.send_drawing(@user._id)
+
+					format.json { render json: { status: "success" } }
+				else
+					format.json { render json: { status: "failure" } }
+				end
 			end
 		end
 
@@ -36,7 +49,6 @@ class DrawingController < ApplicationController
 
 	def add_from_app
 		@user = User.find_for_token_authentication(params)
-		@drawing = nil
 
 		if !@user.nil? && !params[:image].nil?
 			@drawing = @user.drawings.build

@@ -1,8 +1,8 @@
 class Point
   include Mongoid::Document
 
-  field :sample, type: Hash
-  field :handle, type: Hash
+  field :x
+  field :y
 
   embedded_in :stroke
 end

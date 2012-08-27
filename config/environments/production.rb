@@ -1,7 +1,7 @@
 NightZookeeper::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  config.action_mailer.default_url_options = { :host => 'nightzookeeper.com' }
+  config.action_mailer.default_url_options = { :host => 'nzk-beta.herokuapp.com' }
   config.action_mailer.raise_delivery_errors = true
   ActionMailer::Base.smtp_settings = {
     :address        => "smtp.sendgrid.net",

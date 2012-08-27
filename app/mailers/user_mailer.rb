@@ -1,8 +1,9 @@
 class UserMailer < ActionMailer::Base
  	default from: "otter@nightzookeeper.com"
 
-	def send_drawing
-		mail(to: "otter@nightzookeeper.com", subject: "Otters are cool")
-	end
+	def send_drawing(user_id)
+		@user = User.find(user_id)
 
+		mail(to: @user.email, subject: "Your Night Zookeeper Drawing")
+	end
 end
