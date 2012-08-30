@@ -8,6 +8,4 @@ class Stroke
   field :sample_points, type: Array
 
   embedded_in :drawing
-
-  accepts_nested_attributes_for :sample_points
 end
