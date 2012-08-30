@@ -53,13 +53,13 @@ class DrawingController < ApplicationController
 		if !@user.nil? && !params[:image].nil?
 			@drawing = @user.drawings.build
 
-			# @drawing.strokes_attributes = JSON.parse(params[:curves].to_s)
-			@drawing.temp_image = params[:image]
+			@drawing.strokes_attributes = JSON.parse(params[:curves].to_s)
+			# @drawing.temp_image = params[:image]
 		end
 
 		respond_to do |format|
 			if !@drawing.nil? && @drawing.save
-				Drawing.delay.process_drawing(@user._id, @drawing._id, params[:base_id])
+				# Drawing.delay.process_drawing(@user._id, @drawing._id, params[:base_id])
 
 				format.json { render json: { status: "success" } }
 			else
