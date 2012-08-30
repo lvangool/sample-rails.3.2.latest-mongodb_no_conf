@@ -53,7 +53,7 @@ class DrawingController < ApplicationController
 		if !@user.nil? && !params[:image].nil?
 			@drawing = @user.drawings.build
 
-			# @drawing.strokes_attributes = JSON.parse(params[:curves].to_s)
+			@drawing.strokes_attributes = JSON.parse(params[:curves].to_s)
 			@drawing.temp_image = params[:image]
 		end
 
