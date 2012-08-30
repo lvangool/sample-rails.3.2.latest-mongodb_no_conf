@@ -42,7 +42,7 @@ class UserController < ApplicationController
 																	name: mission.name, 
 																	result: (if mission.completed_drawing && mission.completed_drawing.temp_image then {temp_image: mission.completed_drawing.temp_image} elsif mission.completed_drawing then {image: mission.completed_drawing.image.thumb('384x288#').url(format: 'png')} end), 
 																	template: ({image: mission.template_drawing.image.url(format: 'png'), thumb: mission.template_drawing.image.thumb('384x288#').url(format: 'png')} if mission.template_drawing),
-																	tools: mission.tools.to_s
+																	tools: mission.tools
 																} 
 														}	
 							}
