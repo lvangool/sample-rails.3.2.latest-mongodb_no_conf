@@ -7,6 +7,7 @@ class Mission
   field :date_created, type: Time, default: Time.now
   field :completed, type: Boolean, default: false
   field :date_completed, type: Time
+  field :tools, type: Array
   
   embedded_in :user
   embeds_one :template_drawing, class_name: "Drawing", as: :drawable
