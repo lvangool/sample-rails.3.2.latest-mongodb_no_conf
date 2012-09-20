@@ -11,7 +11,7 @@ class UserController < ApplicationController
 	# end of block to delete after testing
 
 	def get_token
-		@user = User.where({:username => params[:username]}).first
+		@user = User.where({:username => params[:username].downcase}).first
 		@result_hash = {}
 
 		if !@user.nil? && @user.valid_password?(params[:password])
@@ -40,8 +40,8 @@ class UserController < ApplicationController
 																	prompt: mission.prompt, 
 																	confirmation: mission.confirmation, 
 																	name: mission.name, 
-																	result: (if mission.completed_drawing && mission.completed_drawing.temp_image then {temp_image: mission.completed_drawing.temp_image} elsif mission.completed_drawing then {image: mission.completed_drawing.image.thumb('384x288#').url(format: 'png')} end), 
-																	template: ({image: mission.template_drawing.image.url(format: 'png'), thumb: mission.template_drawing.image.thumb('384x288#').url(format: 'png')} if mission.template_drawing),
+																	result: (if mission.completed_drawing && mission.completed_drawing.temp_image then {temp_image: mission.completed_drawing.temp_image} elsif mission.completed_drawing then {image: mission.completed_drawing.image.get_url(384, 288)} end), 
+																	template: ({image: mission.template_drawing.get_url(), thumb: mission.template_drawing.image.get_url(384, 288)} if mission.template_drawing),
 																	tools: mission.tools
 																} 
 														}	
@@ -63,12 +63,13 @@ class UserController < ApplicationController
 			@result_hash = {status: "success", drawings: @user.drawings.order_by(:date_created => :desc).map { |drawing| 
 																												{
 																												 _id: drawing._id, 
-																											     full: (drawing.image.url(:format => 'png') if drawing.image), 
-																										    	 thumb: (drawing.image.thumb('160x120#').url(:format => 'png') if drawing.image),
+																											     full: (drawing.get_url() if drawing.image),
+																											     public_id: (drawing.image['public_id'] if drawing.image),
 																										    	 temp_image: (drawing.temp_image if drawing.temp_image)
 																										        }
 																										     }.compact 
 						   }
+			@result_hash[:thumbs] = Cloudinary::Uploader.generate_sprite(@user._id.to_s + "_thumbs", :width => 160, :height => 120, :crop => :scale, :prefix => "nzk_")
 		else
 			@result_hash = {status: "failure"}
 		end

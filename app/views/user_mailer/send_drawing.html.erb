@@ -2,6 +2,6 @@
 
 <p>You just received a drawing from Night Zookeeper.</p>
 
-<p><%=link_to "Drawing", @user.drawings.last.image.url %></p>
+<p><%=link_to "Your drawing", @user.drawings.last.image['url'] %></p>
 
-<p>Here's your login: <%= @user.username %>. You can change it when logging in through the website.</p>
+<p>If you want to know more about Night Zookeeper, visit our <%=link_to "website", "http://nightzookeeper.com/project" %></p>

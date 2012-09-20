@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: hgxtptodm
+  api_key: '596158789631736'
+  api_secret: l5Cgf3pBsGvUnrQG2yxCqGce6_w
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hgxtptodm
+  api_key: '596158789631736'
+  api_secret: l5Cgf3pBsGvUnrQG2yxCqGce6_w
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hgxtptodm
+  api_key: '596158789631736'
+  api_secret: l5Cgf3pBsGvUnrQG2yxCqGce6_w
+  enhance_image_tag: true
+  static_image_support: false

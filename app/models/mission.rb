@@ -1,6 +1,6 @@
 class Mission
   include Mongoid::Document
-  
+
   field :name
   field :prompt
   field :confirmation

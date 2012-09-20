@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-NightZookeeper::Application.load_tasks
+NZK::Application.load_tasks

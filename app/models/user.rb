@@ -38,7 +38,7 @@ class User
 
   field :username
 
-  embeds_many :drawings, as: :drawable
+  embeds_many :drawings, as: :drawable, cascade_callbacks: true
   embeds_many :missions
 
   def self.create_from_email(email)

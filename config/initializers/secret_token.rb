@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-NightZookeeper::Application.config.secret_token = 'e9ab89bbb44add44c36da13664dc28dca80a59d34eb19f8f65a04b24da7d609abf4db615da5404b4b8d72b14331989ed304508d7b911a846bee289d92909bd0b'
+NZK::Application.config.secret_token = 'b313b2b71d0b4dd3b36225fd5fdd666846cbe81fa8b867086ec2faae1d130a94265aef572c625d724bcade5ad86c7a1f968ace52a80ad3f91ad8a93daa2da5de'

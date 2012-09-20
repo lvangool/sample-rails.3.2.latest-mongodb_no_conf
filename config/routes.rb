@@ -1,15 +1,18 @@
-NightZookeeper::Application.routes.draw do
+NZK::Application.routes.draw do
   devise_for :users
 
   root :to => "home#index"
 
-   match "app/mission/complete" => "mission#complete"
-   match "app/drawing/add" => "drawing#add_from_app"
-   match "app/drawing/add_from_email" => "drawing#add_from_email"
-   match "app/missions" => "user#get_drawing_missions"
-   match "app/drawings" => "user#get_drawings"
-   match "app/auth" => "user#get_token"
-   match "app/drawing/delete" => "drawing#delete"
+  match "app/mission/complete" => "mission#complete"
+  match "app/drawing/add" => "drawing#add_from_app"
+  match "app/drawing/add_from_email" => "drawing#add_from_email"
+  match "app/missions" => "user#get_drawing_missions"
+  match "app/drawings" => "user#get_drawings"
+  match "app/auth" => "user#get_token"
+  match "app/drawing/delete" => "drawing#delete"
+  match "animal/add" => "animal#add"
+  match "animal/get/:id" => "animal#get"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

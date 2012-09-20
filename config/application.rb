@@ -6,7 +6,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
-require "rails/test_unit/railtie"
+# require "rails/test_unit/railtie"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -15,7 +15,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module NightZookeeper
+module NZK
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -64,14 +64,5 @@ module NightZookeeper
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
-    config.middleware.insert 0, 'Rack::Cache', {
-      :verbose     => true,
-      :metastore   => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/meta"),
-      :entitystore => URI.encode("file:#{Rails.root}/tmp/dragonfly/cache/body")
-    } # unless Rails.env.production?  ## uncomment this 'unless' in Rails 3.1,
-                                      ## because it already inserts Rack::Cache in production
-
-    config.middleware.insert_after 'Rack::Cache', 'Dragonfly::Middleware', :images
   end
 end
