@@ -9,13 +9,11 @@ class Drawing
 
   # Temp attribute whilst job is processing
   field :temp_image
+  field :strokes, type: Array
 
 	embeds_one :base_drawing, class_name: "Drawing", as: :drawable, cyclic: true
 
 	embedded_in :drawable, polymorphic: true
-  embeds_many :strokes
-
-  accepts_nested_attributes_for :strokes
 
   def self.process_drawing(user_id, drawing_id, base_id)
     user = User.find(user_id)
