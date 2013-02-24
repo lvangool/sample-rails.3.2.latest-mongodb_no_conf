@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby "1.9.3"
-gem 'rails', '3.2.8'
+gem 'rails', '~>3.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -36,7 +36,7 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-gem 'mongoid', '>= 3.0.5'
+gem 'mongoid'
 gem 'devise'
 gem 'devise-encryptable'
 gem 'cloudinary'
